@@ -22,17 +22,13 @@ class Feedback extends CI_Controller {
 	{
 	    //加载类库
         $this->load->database();
+        $this->load->library('export');
         //参数获取
         $stars = $this->input->get_post('stars');
         $content = $this->input->get_post('content');
         //参数处理
         if (empty($stars) || !in_array($stars, array(1,2,3,4,5))) {
-            $output = array(
-                'code'   => 2,
-                'message'  => '参数错误',
-            );
-            echo json_encode($output);
-            exit;
+            $this->export->paramError();
         }
         //业务逻辑
         $data = array(
@@ -47,16 +43,9 @@ class Feedback extends CI_Controller {
 
         //结果处理与返回
         if ($res == 1) {
-            $output = array(
-                'code'   => 0,
-                'message'  => 'ok',
-            );
+            $this->export->ok();
         } else {
-            $output = array(
-                'code'   => 1,
-                'message'  => '操作失败',
-            );
+            $this->export->operateFailed();
         }
-        echo json_encode($output);
 	}
 }
