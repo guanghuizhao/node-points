@@ -36,4 +36,15 @@ class Export
         echo json_encode($output);
         exit;
     }
+
+
+    public function error($code,$message)
+    {
+        $output = array(
+            'code'   => $code,
+            'message'  => $message,
+        );
+        echo json_encode($output);
+        exit;
+    }
 }
