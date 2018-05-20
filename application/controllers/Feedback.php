@@ -42,10 +42,10 @@ class Feedback extends CI_Controller {
         $res = $this->db->insert('feedbacks', $data);
 
         //结果处理与返回
-        if ($res == 1) {
-            $this->export->ok();
-        } else {
+        if ($res == false) {
             $this->export->operateFailed();
+        } else {
+            $this->export->ok();
         }
 	}
 }

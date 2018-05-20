@@ -8,11 +8,12 @@
  */
 class Export
 {
-    public function ok()
+    public function ok($data = array())
     {
         $output = array(
-            'code'   => 0,
+            'code'   => 200,
             'message'  => 'ok',
+            'data'  => $data,
         );
         echo json_encode($output);
         exit;
@@ -20,8 +21,8 @@ class Export
     public function paramError()
     {
         $output = array(
-            'code'   => 100,
-            'message'  => '参数错误',
+            'code'   => 400,
+            'message'  => 'user param error',
         );
         echo json_encode($output);
         exit;
@@ -30,8 +31,8 @@ class Export
     public function operateFailed()
     {
         $output = array(
-            'code'   => 200,
-            'message'  => '操作错误',
+            'code'   => 500,
+            'message'  => 'internal server error',
         );
         echo json_encode($output);
         exit;
