@@ -6,7 +6,7 @@
  * Date: 2018/5/19
  * Time: 下午10:28
  */
-class Course_model extends CI_Model
+class Courses_model extends CI_Model
 {
     /**
      * isOnCourse 是否在上课时间内
@@ -16,10 +16,11 @@ class Course_model extends CI_Model
      */
     public function isOnCourse($beforeMinute = 0, $afterMinute = 0)
     {
+        $this->load->database();
         $currentTime1 = date("Y-m-d H:i:s", time() + 60 * $beforeMinute);
         $currentTime2 = date("Y-m-d H:i:s", time() - 60 * $afterMinute);
         $where = "start_time <= '{$currentTime1}' and end_time >= '{$currentTime2}'";
-        $query = $this->db->where($where);
+        $query = $this->db->get_where('courses', $where);
         $rowObj = $query->row();
         if (!empty($rowObj)) {
             return $rowObj->id;
