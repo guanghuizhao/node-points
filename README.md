@@ -3,6 +3,7 @@
 # 调整说明
 
 1. 为V1.0版本提供了后台服务，后台使用PHP作为开发语言
+2. 对原始的数据进行了改动，改动的SQL在sql目录下，主要为增加字段，建议在测试库先运行
 
 # 接口说明
 
@@ -15,6 +16,6 @@
 |注册|填写用户姓名、电话|/student/register|完成（还需获取用户头像信息，用作排行榜展示）|wechatid(string)、phone(string)、name(string)|data:空|{"code":200,"message":ok,"data":{}}|
 |查看是否已注册|查看当前微信id的注册状态|/student/exist|完成|wechatid(string)|data:增加exist字段(boolean)|{"code":200,"message":ok,"data":{"exist":true}}|
 |查看当前是否在课程时间|用来前端判断展示按钮是否可点击|/course|待完成|wechatid(string)|data:增加onCourse字段(boolean)|{"code":200,"message":ok,"data":{"onCourse":true}}|
-|排名列表|查看全球用户榜||未完成|
-|用户排名|查看当前用户排名||未完成|
+|排名列表|查看全球用户榜||未完成||||
+|用户排名|查看当前用户排名||未完成||||
 
