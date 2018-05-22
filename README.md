@@ -15,7 +15,7 @@
 |查看钱包地址| 获取用户的钱包地址|/student/address/|完成|wechatid(string)、address(string)|data:空|{"code":200,"message":ok,"data":{}}|
 |注册|填写用户姓名、电话|/student/register|完成（还需获取用户头像信息，用作排行榜展示）|wechatid(string)、phone(string)、name(string)|data:空|{"code":200,"message":ok,"data":{}}|
 |查看是否已注册|查看当前微信id的注册状态|/student/exist|完成|wechatid(string)|data:增加exist字段(boolean)|{"code":200,"message":ok,"data":{"exist":true}}|
-|查看当前是否在课程时间|用来前端判断展示按钮是否可点击|/course|待完成|wechatid(string)|data:增加onCourse字段(boolean)|{"code":200,"message":ok,"data":{"onCourse":true}}|
+|查看当前是否在课程时间|用来前端判断展示按钮是否可点击|/course/isOnCourse|完成|无|data:增加onCourse字段(boolean)|{"code":200,"message":ok,"data":{"onCourse":true}}|
 |排名列表|查看全球用户榜||未完成||||
 |用户排名|查看当前用户排名||未完成||||
 

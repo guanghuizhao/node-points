@@ -25,13 +25,14 @@ class Giveaways extends CI_Controller {
         $this->load->library('export');
         $this->load->model('courses_model');
         $this->load->model('giveaways_model');
+        $this->load->model('students_model');
         //参数获取
-        $stars = $this->input->get_post('stars');
-        $content = $this->input->get_post('content');
-        //用户信息
-        $student = array(
-            'wallet_address' => "XXX",
-        );
+        $wechatid = $this->input->get_post('wechatid');
+        //判断用户是否存在
+        $student = $this->students_model->getStudentByWechatUnionId($wechatid);
+        if (empty($student)) {
+            $this->export->error(401, "no student info in system");
+        }
         //判断是否可抽奖
         $courseId = $this->courses_model->isOnCourse();
         if ($courseId == false) {
@@ -47,7 +48,7 @@ class Giveaways extends CI_Controller {
 
         //todo 调试智能合约
 //        $cmd = "node contracts.js {$student['wallet_address']} {$sendNodesCount} {$env}";
-        $cmd = "pwd";
+        $cmd = "pwd";//测试用,待以上智能合约可用时,即可被替换
         exec($cmd, $output, $return_var);
         if ($return_var != 0) {
             $this->export->error(550, "send node failed");
@@ -68,7 +69,7 @@ class Giveaways extends CI_Controller {
             $data = array(
                 'nodes' => $sendNodesCount,
             );
-            $this->export->ok();
+            $this->export->ok($data);
         }
 	}
 
