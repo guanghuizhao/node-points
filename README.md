@@ -7,7 +7,7 @@
 # 接口说明
 
 |接口名|功能|接口地址|完成度|请求参数|返回结果|返回结果示例| 
-|-| :-: |:- |-:|
+|---|---|---|---|
 |提交反馈 | 提交课程打分及评论内容|/feedback|完成|stars(int)、content(string)|data:空|{"code":200,"message":ok,"data":{}}|
 |抽奖 | 课堂抽Node积分，抽奖范围是1～200 | /giveaways |70%（使用js发送node积分部分未完成）|wechatid(string)|data中增加nodes字段，为node积分|{"code":200,"message":ok,"data":{"nodes":199}}|
 |提交钱包地址 | 绑定用户钱包地址 |/student/address/|完成|wechatid(string)|data中增加address字段，为用户钱包地址|{"code":200,"message":ok,"data":{"address":"xxxfffxxxaaeee"}}|
