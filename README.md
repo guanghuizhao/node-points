@@ -10,7 +10,7 @@
 |接口名|功能|接口地址|完成度|请求参数|返回结果|返回结果示例| 
 |---|---|---|---|---|---|---|
 |提交反馈 | 提交课程打分及评论内容|/feedback|完成|stars(int)、content(string)|data:空|{"code":200,"message":ok,"data":{}}|
-|抽奖 | 课堂抽Node积分，抽奖范围是1～200 | /giveaways |70%（使用js发送node积分部分未完成）|sessionid(string)|data中增加nodes字段，为node积分|{"code":200,"message":ok,"data":{"nodes":199}}|
+|抽奖 | 课堂抽Node积分，抽奖范围是1～200 | /giveaways |完成|sessionid(string)|data中增加nodes字段，为node积分|{"code":200,"message":ok,"data":{"nodes":199}}|
 |提交钱包地址 | 绑定用户钱包地址 |/student/address/|完成|sessionid(string)|data中增加address字段，为用户钱包地址|{"code":200,"message":ok,"data":{"address":"xxxfffxxxaaeee"}}|
 |查看钱包地址| 获取用户的钱包地址|/student/address/|完成|sessionid(string)、address(string)|data:空|{"code":200,"message":ok,"data":{}}|
 |登录|根据code获取sessionid|/student/login|完成|code(string)|data包含是否绑定用户信息和sessionid|{code: 200,message: "ok",data: {bind: 1,sessionid: "39bf07012c89aa0a0a83a332b4477bfd"}}|
