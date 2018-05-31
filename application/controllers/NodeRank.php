@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Feedback extends CI_Controller {
+class NodeRank extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -18,20 +18,54 @@ class Feedback extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
-	{
+
+
+    /**
+     * selfRank 全球排名
+     */
+    public function rankPage()
+    {
+        //加载类库
+        $this->load->database();
+        $this->load->library('export');
+        $this->load->model('noderank_model');
+
+        //参数获取
+        $start = $this->input->get_post('start');
+        $num = $this->input->get_post('num');
+        //参数处理
+        $start = $start ? $start : 0;
+        $num = $num ? $num : 20;
+
+        $total = $this->noderank_model->getTotal();
+
+        $res = $this->noderank_model->getRankList($start, $num);
+
+        //结果处理与返回
+        if ($res === false || $total === false) {
+            $this->export->operateFailed();
+        } else {
+            $this->export->ok(array(
+                    'list' => $res,
+                    'total' => $total,
+                )
+            );
+        }
+    }
+    public function selfRank()
+    {
         $this->load->database();
         $this->load->library('export');
         $this->load->library('session');
         $this->load->model('students_model');
-        //参数获取
-        $stars = $this->input->get_post('stars');
-        $content = $this->input->get_post('content');
+        $this->load->model('noderank_model');
         $sessionId = $this->input->get_post('sessionid');
-        //参数处理
-        if (empty($stars) || !in_array($stars, array(1,2,3,4,5))) {
+        $address = $this->input->get_post('address');
+
+        if (empty($sessionId) || empty($address)) {
             $this->export->paramError();
         }
+
         //根据sessionid获取用户openid
         $openid = $this->session->userdata($sessionId);
         if (empty($openid)) {
@@ -43,22 +77,16 @@ class Feedback extends CI_Controller {
             $this->export->error(403, "student not login");
         }
 
-        //业务逻辑
-        $data = array(
-            'student_id' => $student->id,
-            'stars' => $stars,
-            'content' => $content,
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s"),
-        );
-
-        $res = $this->db->insert('feedbacks', $data);
+        $selfRank = $this->noderank_model->getSelfRank($student->id);
 
         //结果处理与返回
-        if ($res == false) {
+        if ($selfRank == false) {
             $this->export->operateFailed();
         } else {
-            $this->export->ok();
+            $this->export->ok(array(
+                'self_rank' => $selfRank,
+            ));
         }
-	}
+    }
+
 }

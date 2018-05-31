@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Created by PhpStorm.
@@ -14,7 +15,7 @@ class Students_model extends CI_Model
     public $phone;
     public $create_at;
     public $update_at;
-    public $wechat_unionId;
+    public $openid;
 
     public function getStudentById($id)
     {
@@ -31,10 +32,10 @@ class Students_model extends CI_Model
     }
 
 
-    public function getStudentByWechatUnionId($wechat_unionId)
+    public function getStudentByOpenId($openid)
     {
         $this->load->database();
-        $query = $this->db->get_where('students', array('wechat_unionId' => $wechat_unionId));
+        $query = $this->db->get_where('students', array('openid' => $openid));
         return $query->row();
     }
 
@@ -52,8 +53,7 @@ class Students_model extends CI_Model
     public function update($student)
     {
         $this->load->database();
-        $this->db->where('id', $student->id);
-        return $this->db->update('students', $student);
+        return $this->db->replace('students', $student);
     }
 
     public function insert($student)

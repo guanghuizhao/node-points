@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Created by PhpStorm.
@@ -39,6 +40,11 @@ class Export
     }
 
 
+    /**
+     * error 通用错误,推荐4XX代表用户错误,5XX代表服务器处理错误
+     * @param $code
+     * @param $message
+     */
     public function error($code,$message)
     {
         $output = array(
