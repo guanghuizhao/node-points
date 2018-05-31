@@ -28,9 +28,8 @@ class Giveaways extends CI_Controller {
         $this->load->model('giveaways_model');
         $this->load->model('students_model');
         $sessionId = $this->input->get_post('sessionid');
-        $address = $this->input->get_post('address');
 
-        if (empty($sessionId) || empty($address)) {
+        if (empty($sessionId)) {
             $this->export->paramError();
         }
 

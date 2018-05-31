@@ -19,10 +19,11 @@
 |绑定钱包地址|填写用户Qtum钱包地址|/student/bindAddress|完成|sessionid(string)、address(string)|data:空|{"code":200,"message":ok,"data":{}}|
 |获取用户信息|获取用户信息,姓名、头像、钱包地址等|/student/getInfo|完成|sessionid(string)|data:空|{"code":200,"message":"ok","data":{"name":"zhangsan","phone":"18700183","wallet_address":"123a18sdaf8dg7s8g0fg8ag","profile":"url","comments":null,"created_at":"2018-05-31 18:06:18","updated_at":"2018-05-31 18:50:21"}}|
 |查看当前是否在课程时间|用来前端判断展示按钮是否可点击|/course/isOnCourse|完成|无|data:增加onCourse字段(boolean)|{"code":200,"message":ok,"data":{"onCourse":true}}|
-|排名列表|查看全球用户榜||未完成||||
-|用户排名|查看当前用户排名||未完成||||
+|排名列表|查看全球用户榜|/nodeRank/rankPage|完成|start(int)默认0,num(int)默认20|data包含list和total|{"code":200,"message":"ok","data":{"list":[{"name":"\u4f55\u7476","profile":null,"total":"120"},{"name":"\u674e\u5b8f\u4f1f","profile":null,"total":"100"},{"name":"\u96f7\u529b","profile":"url_test","total":"10"}],"total":3}}|
+|用户排名|查看当前用户排名|/nodeRank/selfRank|完成|sessionid(string)|data包含排名|{"code":200,"message":"ok","data":{"self_rank":1}}|
 
 # TODO
 
-1. 排行榜暂存想定时遍历学生表（每小时一次），将当前node积分结果存入数据库。
-2. 用户查看榜单时更新个人数据缓存，并返回当前榜单及排名。
+1. 定时获取所有用户的排行榜信息,存入数据库（每小时一次）。
+2. 生成二维码和签到功能
+
