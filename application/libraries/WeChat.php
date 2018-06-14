@@ -11,8 +11,8 @@ require APPPATH . 'third_party/wechat/wxBizDataCrypt.php';
  */
 class WeChat
 {
-    private $appid = '';
-    private $secret = '';
+    private $appid = 'wxdfc68fa93d3ff296';
+    private $secret = '';//需配置
 
     /**
      * code2session

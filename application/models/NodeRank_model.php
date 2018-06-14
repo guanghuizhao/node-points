@@ -15,7 +15,7 @@ class NodeRank_model extends CI_Model
     public function getRankList($start, $num)
     {
         $this->load->database();
-        $sql = "select s.name,s.profile,r.total ".
+        $sql = "select s.name,s.profile,s.nickName,r.total ".
         "from {$this->tableName} as r inner join students as s on r.student_id=s.id ".
         "order by r.total desc limit $start, $num;";
         $query = $this->db->query($sql);
@@ -39,5 +39,32 @@ class NodeRank_model extends CI_Model
 
         $result = $this->db->query($sql)->row();
         return $result->self_rank + 1;
+    }
+
+    public function insert($node)
+    {
+        $this->load->database();
+        return $this->db->insert($this->tableName, $node);
+    }
+
+    public function updateNode($studentId, $nodeCount)
+    {
+        $this->load->database();
+        $query = $this->db->get_where($this->tableName, array('student_id' => $studentId));
+        if (empty($query->row())) {
+            $insertData = array(
+                'student_id' => $studentId,
+                'total' => $nodeCount,
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
+            );
+            $ret = $this->db->insert($this->tableName, $node);
+            return $ret;
+        } else {
+            $ret = $this->db->set('total', $nodeCount, FALSE)
+                ->where('student_id', $studentId)
+                ->update($this->tableName);
+            return $ret;
+        }
     }
 }

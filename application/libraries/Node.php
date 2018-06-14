@@ -36,7 +36,7 @@ class Node
         if ($return_var != 0) {
             return false;
         }
-        return true;
+        return 100;
     }
 
 }

@@ -32,7 +32,6 @@ class Student extends CI_Controller
         $sessionId = $this->input->get_post('sessionid');
 
         $this->session->unset_userdata($sessionId);
-//        $this->session->set_tempdata('12a3', '456', 60*60*24);//设置过期时间为1天
         $this->export->ok();
     }
 
@@ -55,18 +54,20 @@ class Student extends CI_Controller
         if (empty($code)) {
             $this->export->paramError();
         }
-//        //获取微信中用户openid和头像
-//        $weChatInfo = $this->wechat->getUserInfo($code);
+        //获取微信中用户openid和头像
+        $weChatInfo = $this->wechat->getUserInfo($code);
 //        if (empty($weChatInfo)) {
 //            $this->export->error(501, "get wechat openid failed");
 //        }
         $weChatInfo = array(
             'openid' => '1234a',
             'avatarUrl' => 'url',
+            'nickName' => '小明',
         );
 
         $openid = $weChatInfo['openid'];
         $profile = $weChatInfo['avatarUrl'];
+        $nickName = $weChatInfo['nickName'];
         //生成给客户端用的sessionId,并保存映射关系到session中
         $sessionId = md5($openid . time());//生成随机id,提供给客户端
         $this->session->set_tempdata($sessionId, $openid, 60*60*24);//设置过期时间为1天
@@ -77,6 +78,7 @@ class Student extends CI_Controller
             $insertData = array(
                 'openid' => $openid,
                 'profile' => $profile,
+                'nickname' => $nickName,
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => date("Y-m-d H:i:s"),
             );

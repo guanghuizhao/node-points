@@ -9,25 +9,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Students_model extends CI_Model
 {
-    public $id;
-    public $name;
-    public $wallet_address;
-    public $phone;
-    public $create_at;
-    public $update_at;
-    public $openid;
+    private $tableName = 'students';
 
     public function getStudentById($id)
     {
         $this->load->database();
-        $query = $this->db->get_where('students', array('id' => $id));
+        $query = $this->db->get_where($this->tableName, array('id' => $id));
         return $query->row();
     }
 
     public function getStudentByPhone($phone)
     {
         $this->load->database();
-        $query = $this->db->get_where('students', array('phone' => $phone));
+        $query = $this->db->get_where($this->tableName, array('phone' => $phone));
         return $query->row();
     }
 
@@ -35,7 +29,7 @@ class Students_model extends CI_Model
     public function getStudentByOpenId($openid)
     {
         $this->load->database();
-        $query = $this->db->get_where('students', array('openid' => $openid));
+        $query = $this->db->get_where($this->tableName, array('openid' => $openid));
         return $query->row();
     }
 
@@ -45,7 +39,7 @@ class Students_model extends CI_Model
         $query = $this->db->select('wallet_address')
             ->where('id', $id)
             ->limit(1)
-            ->get('students');
+            ->get($this->tableName);
 
         return $query->row()->wallet_address;
     }
@@ -53,12 +47,31 @@ class Students_model extends CI_Model
     public function update($student)
     {
         $this->load->database();
-        return $this->db->replace('students', $student);
+        return $this->db->replace($this->tableName, $student);
     }
 
     public function insert($student)
     {
         $this->load->database();
-        return $this->db->insert('students', $student);
+        return $this->db->insert($this->tableName, $student);
+    }
+
+    /**
+     * getStudentIdAll 获取全部学生的id
+     * @return bool|array
+     */
+    public function getIdAddressAll()
+    {
+        $this->load->database();
+        $query = $this->db->select('id,wallet_address')
+            ->get($this->tableName);
+        if ($query == false) {
+            return false;
+        }
+        $idAddressMap = array();
+        foreach ($query->result() as $row) {
+            $idAddressMap[$row->id] = $row->wallet_address;
+        }
+        return $idAddressMap;
     }
 }
