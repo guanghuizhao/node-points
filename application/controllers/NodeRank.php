@@ -63,7 +63,7 @@ class NodeRank extends CI_Controller {
         $address = $this->input->get_post('address');
 
         if (empty($sessionId)) {
-            $this->export->paramError();
+            $this->export->error(405, "invalid sessionid");
         }
 
         //根据sessionid获取用户openid

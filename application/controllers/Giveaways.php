@@ -30,9 +30,8 @@ class Giveaways extends CI_Controller {
         $sessionId = $this->input->get_post('sessionid');
 
         if (empty($sessionId)) {
-            $this->export->paramError();
+            $this->export->error(405, "invalid sessionid");
         }
-
         //根据sessionid获取用户openid
         $openid = $this->session->userdata($sessionId);
         if (empty($openid)) {

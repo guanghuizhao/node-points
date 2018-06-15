@@ -32,6 +32,9 @@ class Feedback extends CI_Controller {
         if (empty($stars) || !in_array($stars, array(1,2,3,4,5))) {
             $this->export->paramError();
         }
+        if (empty($sessionId)) {
+            $this->export->error(405, "invalid sessionid");
+        }
         //根据sessionid获取用户openid
         $openid = $this->session->userdata($sessionId);
         if (empty($openid)) {

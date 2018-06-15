@@ -19,11 +19,15 @@ class Sign extends CI_Controller
         $this->load->model('students_model');
         $sessionId    = $this->input->get_post('sessionid');
         $studentPoint = $this->input->get_post('point');
+        if (empty($sessionId)) {
+            $this->export->error(405, "invalid sessionid");
+        }
         if (empty($studentPoint) || strpos($studentPoint, ",") === false) {
             $this->export->error(405, "invalid point");
         }
         //根据sessionid获取用户openid
         $openid = $this->session->userdata($sessionId);
+        var_dump($openid);
         if (empty($openid)) {
             $this->export->error(405, "invalid sessionid");
         }

@@ -44,6 +44,14 @@ class Students_model extends CI_Model
         return $query->row()->wallet_address;
     }
 
+    public function updateByOpenid($openid, $updateInfo)
+    {
+        $this->load->database();
+        $this->db->where('openid', $openid);
+        $ret = $this->db->update($this->tableName, $updateInfo);
+        return $ret;
+    }
+
     public function update($student)
     {
         $this->load->database();
