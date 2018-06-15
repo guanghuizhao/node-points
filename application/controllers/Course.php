@@ -28,7 +28,7 @@ class Course extends CI_Controller
 //        $wechatid = $this->input->get_post('wechatid');
 
         //提前十分钟可以算课程内
-        $courseId = $this->courses_model->isOnCourse($beforeMinute = 10, $afterMinute = 0);
+        $courseId = $this->courses_model->isOnCourse();
 
         $this->export->ok(
             array(

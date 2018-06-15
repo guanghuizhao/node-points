@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 14/06/2018 15:10:20
+ Date: 15/06/2018 10:52:53
 */
 
 SET NAMES utf8mb4;
@@ -134,15 +134,15 @@ CREATE TABLE `giveaways` (
 -- ----------------------------
 DROP TABLE IF EXISTS `node_rank`;
 CREATE TABLE `node_rank` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `total` double NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `student_id` (`student_id`),
   KEY `total` (`total`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for schema_migrations
@@ -170,6 +170,6 @@ CREATE TABLE `students` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `openid_key` (`openid`(10)) USING HASH
-) ENGINE=InnoDB AUTO_INCREMENT=339 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=340 DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;

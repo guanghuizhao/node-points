@@ -12,7 +12,7 @@ require APPPATH . 'third_party/wechat/wxBizDataCrypt.php';
 class WeChat
 {
     private $appid = 'wxdfc68fa93d3ff296';
-    private $secret = '';//需配置
+    private $secret = 'eed0c00ae85586db04a8ab7b68d1cdc4';//需配置
 
     /**
      * code2session
@@ -37,9 +37,11 @@ class WeChat
      */
     public function getUserInfo($code)
     {
-        $url1 = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$this->appid}&secret={$this->secret}&js_code={$code}&grant_type=authorization_code";
+        $url1 = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$this->appid}&secret={$this->secret}&code={$code}&grant_type=authorization_code";
+        print_r($url1);
         $res1 = $this->https_request($url1);
         $data = json_decode($res1, true);
+        print_r($data);die;
         if (empty($data['openid']) || $data['access_token']) {
             return false;
         }

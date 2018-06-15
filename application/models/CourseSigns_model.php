@@ -7,12 +7,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Date: 2018/5/19
  * Time: 下午10:28
  */
-class Giveaways_model extends CI_Model
+class CourseSigns_model extends CI_Model
 {
-    private $tableName = 'giveaways';
+    private $tableName = 'course_signs';
 
     /**
-     * getNodesByCourseId 获取某学生在某节课获取积分情况,用于判断是否重复抽奖
+     * getNodesByCourseId 获取某学生在某节课获取积分情况,用于判断是否重复签到
      * @param $courseId
      * @param $studentId
      * @return mixed
@@ -20,12 +20,12 @@ class Giveaways_model extends CI_Model
     public function getNodesByCourseId($courseId, $studentId)
     {
         $this->load->database();
-        $query = $this->db->get_where('giveaways', array('course_id' => $courseId, 'student_id' => $studentId));
+        $query = $this->db->get_where($this->tableName, array('course_id' => $courseId, 'student_id' => $studentId));
         $rowObj = $query->row();
         if (!empty($rowObj)) {
-            return $rowObj->nodes;
+            return $rowObj->received_nodes;
         } else {
-            false;
+            return false;
         }
     }
 

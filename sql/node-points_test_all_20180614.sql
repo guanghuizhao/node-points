@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 14/06/2018 15:09:55
+ Date: 15/06/2018 10:52:31
 */
 
 SET NAMES utf8mb4;
@@ -1034,24 +1034,15 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `node_rank`;
 CREATE TABLE `node_rank` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `total` double NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `student_id` (`student_id`),
   KEY `total` (`total`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of node_rank
--- ----------------------------
-BEGIN;
-INSERT INTO `node_rank` VALUES (1, 2, 10, '2018-05-31 02:35:44', '2018-05-31 02:35:49');
-INSERT INTO `node_rank` VALUES (2, 3, 100, '2018-05-31 02:36:07', '2018-05-31 02:36:11');
-INSERT INTO `node_rank` VALUES (3, 5, 120, '2018-05-31 02:36:58', '2018-05-31 02:37:02');
-COMMIT;
+) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for schema_migrations
@@ -1079,7 +1070,7 @@ CREATE TABLE `students` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `openid_key` (`openid`(10)) USING HASH
-) ENGINE=InnoDB AUTO_INCREMENT=339 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=340 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of students
@@ -1344,9 +1335,10 @@ INSERT INTO `students` VALUES (332, '张博安', '18220901211', 'QfSyJLrzqpKdArw
 INSERT INTO `students` VALUES (333, '党枫', '18191947819', 'QM5jpfHxxDUbrHaqUQBDajfZrqNABDsX6D', NULL, NULL, NULL, NULL, '2018-04-11 02:05:53', '2018-04-11 02:05:53');
 INSERT INTO `students` VALUES (334, '郭晓睿', '18292804528', 'QVMycSY9vsWhgEEDgAA5yCtfk4biZkTfGM', NULL, NULL, NULL, NULL, '2018-04-11 02:05:53', '2018-04-11 02:05:53');
 INSERT INTO `students` VALUES (335, '陈伟', '17392239517', 'QjXnx3xsf93STZAMNNFJrzqst1Y2F7MHC6', NULL, NULL, NULL, NULL, '2018-04-11 02:05:53', '2018-04-11 02:05:53');
-INSERT INTO `students` VALUES (336, 'zhangsan', '18700183', '123a18sdaf8dg7s8g0fg8ag', '1234a', NULL, 'url', NULL, '2018-05-31 18:06:18', '2018-05-31 18:50:21');
+INSERT INTO `students` VALUES (336, 'zhangsan', '18700183', '123a18sdaf8dg7s8g0fg8ag', '', NULL, 'url', NULL, '2018-05-31 18:06:18', '2018-05-31 18:50:21');
 INSERT INTO `students` VALUES (337, 'zhangsan', '18700183', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '2018-05-31 18:21:42');
 INSERT INTO `students` VALUES (338, NULL, NULL, NULL, '123a', NULL, 'url', NULL, '2018-05-31 18:37:05', '2018-05-31 18:37:05');
+INSERT INTO `students` VALUES (339, NULL, NULL, NULL, '1234a', '小明', 'url', NULL, '2018-06-14 15:26:06', '2018-06-14 15:26:06');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

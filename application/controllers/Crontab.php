@@ -3,22 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Crontab extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
+    //crontab配置方式:
+    //第一步:输入命令:crontab -e
+    //第二步:编辑一行配置,如下(每五分钟执行一次,cd到网站根目录,需要根据实际目录调整)
+    // */5 * * * * cd /home/wwwroot/default && php index.php crontab updateNode >> log/updateNode.log
+    /**
+     * 定时脚本,用于离线更新Node积分总数
+     * 手动运行方式(在项目根目录下):php index.php crontab updateNode
 	 */
-
     public function updateNode()
     {
         $this->load->database();
@@ -32,10 +24,9 @@ class Crontab extends CI_Controller {
             $this->export->paramError();
         }
 
-
-        $idAddressMap = $this->students_model->getStudentIdAll();
-        if (empty($idList)) {
-            $this->export->error(510, "sql query failed");
+        $idAddressMap = $this->students_model->getIdAddressAll();
+        if (empty($idAddressMap)) {
+            $this->export->error(510, "sql query failed" . date("Y-m-d H:i:s"));
         }
 
         $failList = array();
@@ -50,11 +41,12 @@ class Crontab extends CI_Controller {
                 $failList['db_update'][] = $id;
             }
         }
-
+        $p['failList'] = $failList;
+        $p['datetime'] = date("Y-m-d H:i:s");
         if (empty($failList)) {
-            $this->export->ok();
+            $this->export->ok($p);
         } else {
-            $this->export->error('510', $failList);
+            $this->export->error('510', $p);
         }
     }
 

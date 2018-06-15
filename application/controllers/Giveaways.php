@@ -49,7 +49,7 @@ class Giveaways extends CI_Controller {
         if ($courseId == false) {
             $this->export->error(450, "not on course time");
         }
-        $currentNodes = $this->giveaways_model->getNodesByCourseId($courseId);
+        $currentNodes = $this->giveaways_model->getNodesByCourseId($courseId, $student->id);
         if ($currentNodes != false) {
             $this->export->error(451, "no chance");
         }
@@ -67,7 +67,7 @@ class Giveaways extends CI_Controller {
             'updated_at' => date("Y-m-d H:i:s"),
             'is_sent' => 1,
         );
-        $res = $this->db->insert('giveaways', $data);
+        $res = $this->giveaways_model->insert($data);
         //结果处理与返回
         if ($res == false) {
             $this->export->operateFailed();

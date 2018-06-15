@@ -57,13 +57,14 @@ class Students_model extends CI_Model
     }
 
     /**
-     * getStudentIdAll 获取全部学生的id
+     * getStudentIdAll 获取学生id和地址,条件为地址非空
      * @return bool|array
      */
     public function getIdAddressAll()
     {
         $this->load->database();
         $query = $this->db->select('id,wallet_address')
+            ->where("wallet_address is not null and wallet_address != ''")
             ->get($this->tableName);
         if ($query == false) {
             return false;

@@ -56,14 +56,14 @@ class Student extends CI_Controller
         }
         //获取微信中用户openid和头像
         $weChatInfo = $this->wechat->getUserInfo($code);
-//        if (empty($weChatInfo)) {
-//            $this->export->error(501, "get wechat openid failed");
-//        }
-        $weChatInfo = array(
-            'openid' => '1234a',
-            'avatarUrl' => 'url',
-            'nickName' => '小明',
-        );
+        if (empty($weChatInfo)) {
+            $this->export->error(501, "get wechat openid failed");
+        }
+//        $weChatInfo = array(
+//            'openid' => '1234a',
+//            'avatarUrl' => 'url',
+//            'nickName' => '小明',
+//        );
 
         $openid = $weChatInfo['openid'];
         $profile = $weChatInfo['avatarUrl'];
