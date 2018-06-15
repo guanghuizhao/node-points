@@ -18,7 +18,6 @@ class Map
      */
     public function isInCourseRange($coursePoint, $studentPoint, $rangeLimited = 1000)
     {
-
         list($lng1, $lat1) = array_filter(preg_split("/,|，|、/", $coursePoint));
         list($lng2, $lat2) = array_filter(preg_split("/,|，|、/", $studentPoint));
         $distance = $this->getDistance($lng1, $lat1, $lng2, $lat2);
