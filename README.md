@@ -20,7 +20,7 @@
 |查看当前是否在课程时间|用来前端判断展示按钮是否可点击|/course/isOnCourse|完成|无|data:增加onCourse字段(boolean)|{"code":200,"message":ok,"data":{"onCourse":true}}|
 |排名列表|查看全球用户榜|/nodeRank/rankPage|完成|start(int)默认0,num(int)默认20|data包含list和total|{"code":200,"message":"ok","data":{"list":[{"name":"\u4f55\u7476","profile":null,"total":"120"},{"name":"\u674e\u5b8f\u4f1f","profile":null,"total":"100"},{"name":"\u96f7\u529b","profile":"url_test","total":"10"}],"total":3}}|
 |用户排名|查看当前用户排名|/nodeRank/selfRank|完成|sessionid(string)|data包含排名|{"code":200,"message":"ok","data":{"self_rank":1}}|
-|签到|课程签到,获取积分|/sign|完成|sessionid(string)、point(string,经纬度逗号拼接)|data包含排名|{"code":200,"message":ok,"data":{"nodes":350}}|
+|签到|课程签到,获取积分|/sign|完成|sessionid(string)、point(string,经纬度逗号拼接)|data包含nodes字段|{"code":200,"message":ok,"data":{"nodes":350}}|
 
 # 脚本
 
