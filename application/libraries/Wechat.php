@@ -9,7 +9,7 @@ require APPPATH . 'third_party/wechat/wxBizDataCrypt.php';
  * Date: 2018/5/30
  * Time: 下午4:08
  */
-class WeChat
+class Wechat
 {
     private $appid = 'wxdfc68fa93d3ff296';
     private $secret = 'eed0c00ae85586db04a8ab7b68d1cdc4';//需配置

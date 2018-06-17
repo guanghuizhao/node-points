@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Date: 2018/5/19
  * Time: 下午10:28
  */
-class CourseSigns_model extends CI_Model
+class Coursesigns_model extends CI_Model
 {
     private $tableName = 'course_signs';
 

@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Date: 2018/5/19
  * Time: 下午10:28
  */
-class NodeRank_model extends CI_Model
+class Noderank_model extends CI_Model
 {
     private $tableName = 'node_rank';
 
